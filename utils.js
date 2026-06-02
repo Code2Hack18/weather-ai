@@ -8,3 +8,13 @@ export function required(name){
         }
         return value;
 };
+
+export function formatAgentResponse(response, toolName) {
+  const toolMessage = response?.messages?.find(
+    (message) =>
+      message.constructor.name === "ToolMessage" &&
+      message.name === toolName
+  );
+
+  return toolMessage?.content || "No response found";
+}
